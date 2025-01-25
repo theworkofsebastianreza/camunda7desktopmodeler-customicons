@@ -3,6 +3,8 @@ This Plugin enables the Camunda Modeler to render individual tasks, just like in
 
 Edit the included Task template lightning_tasktemplate.json and adjust it to your needs. The Icon can be adapted with the Icon property as in the documentation of Camunda 8 https://docs.camunda.io/docs/components/modeler/desktop-modeler/element-templates/defining-templates/
 
+At the moment, this is an external task that publishes to a certain topic. 
+
 Save that file  in the folder resources\element-templates of your Camunda Desktop Modeler.
 Then place the content of this repo in a Sub-Folder of \resources\plugins e.g. resources\plugins\C7CustomIcon
 
