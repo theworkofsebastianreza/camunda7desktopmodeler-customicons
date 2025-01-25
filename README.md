@@ -18,4 +18,6 @@ This Plugin enables the Camunda Modeler to render individual icons for your task
 Start up your Desktop Modeler. Start a new Camunda 7 Diagram and add an Activity. Apply the template. You should now see the individual icon.
 At the moment this just works for plain activities (so don´t select User / Service / ScritTask as type)
 
-![Your own Icon in Camunda 7 Activities/Tasks in Desktop Modeler](/ownicon.jpg "Your own Icon in Camunda 7 Activities/Tasks in Desktop Modeler")
+![Your own Icon in Camunda 7 Activities/Tasks in Desktop Modeler](/1.jpg "Your own Icon in Camunda 7 Activities/Tasks in Desktop Modeler")
+![Your own Icon in Camunda 7 Activities/Tasks in Desktop Modeler](/2.jpg "Your own Icon in Camunda 7 Activities/Tasks in Desktop Modeler")
+![Your own Icon in Camunda 7 Activities/Tasks in Desktop Modeler](/3.jpg "Your own Icon in Camunda 7 Activities/Tasks in Desktop Modeler")
