@@ -1,0 +1,56 @@
+[
+  {
+    "name": "Example Lightning Connector",
+    "id": "lightning-connector",
+    "appliesTo": [
+      "bpmn:Activity"
+    ],
+	 "icon": {
+      "contents": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 22 22' fill='none'%3E%3Cpath d='M12 2L6 12H10L8 20L14 10H10L12 2Z' fill='red'/%3E%3C/svg%3E"
+    },
+    "properties": [
+    {
+      "label": "Task Type",
+      "type": "Hidden",
+      "binding": {
+        "type": "property",
+        "name": "camunda:type"
+      },
+      "value": "external"
+    },
+	{
+      "label": "External Task Topic",
+      "type": "Hidden",
+      "binding": {
+        "type": "property",
+        "name": "camunda:topic"
+      },
+      "value": "lightning"
+    },
+    {
+      "label": "E-Mail",
+      "type": "String",
+      "binding": {
+        "type": "camunda:inputParameter",
+        "name": "email",
+		"value": "email"
+      }
+    },
+    {
+      "label": "Mailtemplate",
+      "type": "String",
+      "binding": {
+        "type": "camunda:inputParameter",
+        "name": "mailtemplate"
+      }
+    },{
+      "label": "Description",
+      "type": "String",
+      "binding": {
+        "type": "camunda:inputParameter",
+        "name": "description"
+      }
+    }
+  ]
+  }
+]
