@@ -1,5 +1,5 @@
 # Camunda Desktop Modeler Plugin to render individual Icons in Camunda 7 Diagrams
-This Plugin enables the Camunda Modeler to render individual tasks, just like in Camunda 8.
+This Plugin enables the Camunda Modeler to render individual icons for your task Template, (maybe) just like in Camunda 8.
 
 ## Create Element Template for Activitiy
 <ol>
