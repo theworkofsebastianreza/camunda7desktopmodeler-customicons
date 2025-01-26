@@ -11,35 +11,36 @@ class C7CustomIcon {
 
       // Check if Element is a Task
       if (element.type === 'bpmn:Task') {
-        this.changeIcon(element);
+		this.changeIcon(element);
       }
     });
   }
 
   changeIcon(element) {
     const businessObject = element.businessObject;
-
+	const gfx = this.elementRegistry.getGraphics(element.id);
+	
     // Get the element template and check if it has an icon
     const templateId = businessObject.modelerTemplate;
     const template = templateId ? this.elementTemplates.get(templateId) : null;
 
     if (template && template.icon && template.icon.contents) {
       const svgData = template.icon.contents;
-
       // Add the Icon
       this.addCustomIcon(element, svgData);
     }
+	else { 
+		// Check if Icon already exists
+		let existingIcon = gfx.querySelector('.c7customicon');
+		if (existingIcon) {
+		  gfx.removeChild(existingIcon); // Remove old Icon
+		}
+	}
   }
 
   addCustomIcon(element, svgData) {
     // Get Graphics of Element
     const gfx = this.elementRegistry.getGraphics(element.id);
-
-    // Check if Icon already exists
-    let existingIcon = gfx.querySelector('.custom-icon');
-    if (existingIcon) {
-      gfx.removeChild(existingIcon); // Remove old Icon
-    }
 
     // Create a new <image>-Element for the icon
     const image = document.createElementNS('http://www.w3.org/2000/svg', 'image');
@@ -48,7 +49,7 @@ class C7CustomIcon {
     image.setAttributeNS(null, 'y', '5'); // Position relative to Task-Box
     image.setAttributeNS(null, 'width', '20'); // Width of Icons
     image.setAttributeNS(null, 'height', '20'); // Height of Icons
-    image.setAttribute('class', 'custom-icon'); // Class to identify
+    image.setAttribute('class', 'c7customicon'); // Class to identify
 
     // Prevent that Icon blocks interactions
     image.setAttributeNS(null, 'pointer-events', 'none');
@@ -59,7 +60,7 @@ class C7CustomIcon {
 }
 
 // Injection-Dependencies for bpmn-js
-LoggingPlugin.$inject = [
+C7CustomIcon.$inject = [
   'eventBus',
   'elementRegistry',
   'graphicsFactory',
@@ -68,6 +69,6 @@ LoggingPlugin.$inject = [
 
 // export Plugin
 export default {
-  __init__: ['C7CustomIconPlugin'],
+  __init__: ['C7CustomIcon'],
   C7CustomIcon: ['type', C7CustomIcon]
 };

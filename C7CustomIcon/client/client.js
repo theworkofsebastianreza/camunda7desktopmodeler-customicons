@@ -1,6 +1,6 @@
 import { registerBpmnJSPlugin } from 'camunda-modeler-plugin-helpers';
 
-import LoggingPlugin from './LoggingPlugin';
+import C7CustomIcon from './C7CustomIcon';
 
 // Register a plugin for bpmn-js
-registerBpmnJSPlugin(LoggingPlugin);
+registerBpmnJSPlugin(C7CustomIcon);

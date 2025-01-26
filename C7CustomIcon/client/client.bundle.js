@@ -2,17 +2,17 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./client/LoggingPlugin.js":
-/*!*********************************!*\
-  !*** ./client/LoggingPlugin.js ***!
-  \*********************************/
+/***/ "./client/C7CustomIcon.js":
+/*!********************************!*\
+  !*** ./client/C7CustomIcon.js ***!
+  \********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-class LoggingPlugin {
+class C7CustomIcon {
   constructor(eventBus, elementRegistry, graphicsFactory, elementTemplates) {
     this.eventBus = eventBus;
     this.elementRegistry = elementRegistry;
@@ -23,82 +23,78 @@ class LoggingPlugin {
     this.eventBus.on('element.changed', (event) => {
       const element = event.element;
 
-      // Prüfe, ob das Element ein Task ist
+      // Check if Element is a Task
       if (element.type === 'bpmn:Task') {
-        this.changeIcon(element);
-        // Überprüfe auf Template
-        this.checkTemplate(element);
+		
+		/*
+		// Always remove the item first, to handle Unlink behavior of Template
+		let existingIcon = gfx.querySelector('.c7customicon');
+		if (existingIcon) {
+		  gfx.removeChild(existingIcon); // Remove old Icon
+		}
+		*/
+		
+		this.changeIcon(element);
       }
     });
   }
 
   changeIcon(element) {
     const businessObject = element.businessObject;
-
-    // Hole das Template und dessen Icon, falls vorhanden
+	const gfx = this.elementRegistry.getGraphics(element.id);
+	
+    // Get the element template and check if it has an icon
     const templateId = businessObject.modelerTemplate;
     const template = templateId ? this.elementTemplates.get(templateId) : null;
 
     if (template && template.icon && template.icon.contents) {
       const svgData = template.icon.contents;
-
-      // Icon hinzufügen, ohne die bestehende Grafik zu entfernen
+      // Add the Icon
       this.addCustomIcon(element, svgData);
     }
+	else { 
+		// Check if Icon already exists
+		let existingIcon = gfx.querySelector('.c7customicon');
+		if (existingIcon) {
+		  gfx.removeChild(existingIcon); // Remove old Icon
+		}
+	}
   }
 
   addCustomIcon(element, svgData) {
-    // Grafikgruppe des Elements abrufen
+    // Get Graphics of Element
     const gfx = this.elementRegistry.getGraphics(element.id);
 
-    // Prüfen, ob das Icon bereits existiert, um Dopplungen zu vermeiden
-    let existingIcon = gfx.querySelector('.custom-icon');
-    if (existingIcon) {
-      gfx.removeChild(existingIcon); // Altes Icon entfernen
-    }
-
-    // Neues <image>-Element für das Icon erstellen
+    // Create a new <image>-Element for the icon
     const image = document.createElementNS('http://www.w3.org/2000/svg', 'image');
     image.setAttributeNS(null, 'href', svgData);
-    image.setAttributeNS(null, 'x', '5'); // Position relativ zur Task-Box
-    image.setAttributeNS(null, 'y', '5'); // Position relativ zur Task-Box
-    image.setAttributeNS(null, 'width', '20'); // Breite des Icons
-    image.setAttributeNS(null, 'height', '20'); // Höhe des Icons
-    image.setAttribute('class', 'custom-icon'); // Klasse zur Identifikation
+    image.setAttributeNS(null, 'x', '5'); // Position relative to Task-Box
+    image.setAttributeNS(null, 'y', '5'); // Position relative to Task-Box
+    image.setAttributeNS(null, 'width', '20'); // Width of Icons
+    image.setAttributeNS(null, 'height', '20'); // Height of Icons
+    image.setAttribute('class', 'c7customicon'); // Class to identify
 
-    // Verhindert, dass das Icon Interaktionen blockiert
+    // Prevent that Icon blocks interactions
     image.setAttributeNS(null, 'pointer-events', 'none');
 
-    // Füge das Icon zur grafischen Darstellung hinzu
+    // Add icon to graphical element
     gfx.appendChild(image);
-  }
-
-  checkTemplate(element) {
-    const businessObject = element.businessObject;
-    // Prüfen, ob ein Template verknüpft ist
-    const templateId = businessObject.modelerTemplate;
-
-    if (templateId) {
-      // Template-Name abrufen
-      const template = this.elementTemplates.get(templateId);
-    }
   }
 }
 
-// Injection-Dependencies für bpmn-js
-LoggingPlugin.$inject = [
+// Injection-Dependencies for bpmn-js
+C7CustomIcon.$inject = [
   'eventBus',
   'elementRegistry',
   'graphicsFactory',
   'elementTemplates'
 ];
 
-// Plugin exportieren
+// export Plugin
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  __init__: ['loggingPlugin'],
-  loggingPlugin: ['type', LoggingPlugin]
+  __init__: ['C7CustomIcon'],
+  C7CustomIcon: ['type', C7CustomIcon]
 });
-
 
 /***/ }),
 
@@ -438,13 +434,13 @@ var __webpack_exports__ = {};
   \**************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var camunda_modeler_plugin_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! camunda-modeler-plugin-helpers */ "./node_modules/camunda-modeler-plugin-helpers/index.js");
-/* harmony import */ var _LoggingPlugin__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LoggingPlugin */ "./client/LoggingPlugin.js");
+/* harmony import */ var _C7CustomIcon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./C7CustomIcon */ "./client/C7CustomIcon.js");
 
 
 
 
 // Register a plugin for bpmn-js
-(0,camunda_modeler_plugin_helpers__WEBPACK_IMPORTED_MODULE_0__.registerBpmnJSPlugin)(_LoggingPlugin__WEBPACK_IMPORTED_MODULE_1__["default"]);
+(0,camunda_modeler_plugin_helpers__WEBPACK_IMPORTED_MODULE_0__.registerBpmnJSPlugin)(_C7CustomIcon__WEBPACK_IMPORTED_MODULE_1__["default"]);
 /******/ })()
 ;
 //# sourceMappingURL=client.bundle.js.map
