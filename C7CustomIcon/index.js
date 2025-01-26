@@ -1,6 +1,6 @@
 'use strict';
 
 module.exports = {
-  name: 'bpmn-js Plugin Example',
+  name: 'C7CustomIcons',
   script: './client/client.bundle.js'
 };
