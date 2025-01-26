@@ -8,10 +8,18 @@ This Plugin enables the Camunda Modeler to render individual icons for your task
   <li>Save that file  in the folder resources\element-templates of your Camunda Desktop Modeler.</li>
 </ol>
 
-## Add Plugin to the plugins folder
+## Install Plugin for the Desktop Modeler
 <ol>
-  <li>Place the folder C7CustomIcon into \resources\plugins e.g. resources\plugins\C7CustomIcon</li>
-  <li>If you make changes and want to see them, you have to run 'npm run bundle' (Make sure to run 'npm install' first)</li>
+  <li>Place the folder C7CustomIcon into the folder of your Desktop Modeler: \resources\plugins e.g. resources\plugins\C7CustomIcon</li>
+  <li>Restart the Desktop Modeler</li>
+</ol>
+
+## Change the plugin
+<ol>
+  <li>If you want to make changes to the Plugin and want to see them, you have to run 'npm install' first in the C7CustomIcon folder, that lies within resources\plugins</li>
+  <li>The main file to work in, is ![/client/C7CustomIcon.js](https://github.com/theworkofsebastianreza/camunda7desktopmodeler-customicons/blob/main/C7CustomIcon/client/C7CustomIcon.js "/client/C7CustomIcon.js")</li>
+  <li>After you have made your changes, run 'npm run bundle' in the above mentiones Plugin folder.</li>
+  <li>Don´t forget to write here about your cool new features/ideas! The other Camunda 7 Faans surely will be grateful :-)</li>
 </ol>
 
 ## Start using your own Icons for Plugins in Camunda 7!
