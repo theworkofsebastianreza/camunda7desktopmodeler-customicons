@@ -20,7 +20,7 @@ It builds on the work of Philipp Fromme with the Plugin templateas found here ht
   <li>If you want to make changes to the Plugin and want to see them, you have to run 'npm install' first in the C7CustomIcon folder, that lies within resources\plugins</li>
   <li>The main file to work in, is /client/C7CustomIcon.js</li>
   <li>After you have made your changes, run 'npm run bundle' in the above mentiones Plugin folder.</li>
-  <li>Don´t forget to write here about your cool new features/ideas! The other Camunda 7 Faans surely will be grateful :-)</li>
+  <li>Don´t forget to write here about your cool new features/ideas! The other Camunda 7 Fans surely will be grateful :-)</li>
 </ol>
 
 ## Start using your own Icons for Plugins in Camunda 7!
