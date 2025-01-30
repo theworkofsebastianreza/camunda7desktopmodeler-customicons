@@ -25,15 +25,6 @@ class C7CustomIcon {
 
       // Check if Element is a Task
       if (element.type === 'bpmn:Task') {
-		
-		/*
-		// Always remove the item first, to handle Unlink behavior of Template
-		let existingIcon = gfx.querySelector('.c7customicon');
-		if (existingIcon) {
-		  gfx.removeChild(existingIcon); // Remove old Icon
-		}
-		*/
-		
 		this.changeIcon(element);
       }
     });
@@ -42,21 +33,22 @@ class C7CustomIcon {
   changeIcon(element) {
     const businessObject = element.businessObject;
 	const gfx = this.elementRegistry.getGraphics(element.id);
-	
-    // Get the element template and check if it has an icon
-    const templateId = businessObject.modelerTemplate;
-    const template = templateId ? this.elementTemplates.get(templateId) : null;
+	if (gfx) {
+		// Get the element template and check if it has an icon
+		const templateId = businessObject.modelerTemplate;
+		const template = templateId ? this.elementTemplates.get(templateId) : null;
 
-    if (template && template.icon && template.icon.contents) {
-      const svgData = template.icon.contents;
-      // Add the Icon
-      this.addCustomIcon(element, svgData);
-    }
-	else { 
-		// Check if Icon already exists
-		let existingIcon = gfx.querySelector('.c7customicon');
-		if (existingIcon) {
-		  gfx.removeChild(existingIcon); // Remove old Icon
+		if (template && template.icon && template.icon.contents) {
+		  const svgData = template.icon.contents;
+		  // Add the Icon
+		  this.addCustomIcon(element, svgData);
+		}
+		else { 
+			// Check if Icon already exists
+			let existingIcon = gfx.querySelector('.c7customicon');
+			if (existingIcon) {
+			  gfx.removeChild(existingIcon); // Remove old Icon
+			}
 		}
 	}
   }
@@ -64,21 +56,22 @@ class C7CustomIcon {
   addCustomIcon(element, svgData) {
     // Get Graphics of Element
     const gfx = this.elementRegistry.getGraphics(element.id);
+	if (gfx) {
+		// Create a new <image>-Element for the icon
+		const image = document.createElementNS('http://www.w3.org/2000/svg', 'image');
+		image.setAttributeNS(null, 'href', svgData);
+		image.setAttributeNS(null, 'x', '5'); // Position relative to Task-Box
+		image.setAttributeNS(null, 'y', '5'); // Position relative to Task-Box
+		image.setAttributeNS(null, 'width', '20'); // Width of Icons
+		image.setAttributeNS(null, 'height', '20'); // Height of Icons
+		image.setAttribute('class', 'c7customicon'); // Class to identify
 
-    // Create a new <image>-Element for the icon
-    const image = document.createElementNS('http://www.w3.org/2000/svg', 'image');
-    image.setAttributeNS(null, 'href', svgData);
-    image.setAttributeNS(null, 'x', '5'); // Position relative to Task-Box
-    image.setAttributeNS(null, 'y', '5'); // Position relative to Task-Box
-    image.setAttributeNS(null, 'width', '20'); // Width of Icons
-    image.setAttributeNS(null, 'height', '20'); // Height of Icons
-    image.setAttribute('class', 'c7customicon'); // Class to identify
+		// Prevent that Icon blocks interactions
+		image.setAttributeNS(null, 'pointer-events', 'none');
 
-    // Prevent that Icon blocks interactions
-    image.setAttributeNS(null, 'pointer-events', 'none');
-
-    // Add icon to graphical element
-    gfx.appendChild(image);
+		// Add icon to graphical element
+		gfx.appendChild(image);
+	}
   }
 }
 
